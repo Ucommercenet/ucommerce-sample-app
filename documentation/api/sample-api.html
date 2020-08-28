@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+	<head>
+		<meta charset="utf-8" />
+		<title>uCommerce Documentation - Sample Api</title>
+		
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" />
+		<link rel="publisher" href="https://plus.google.com/+UcommerceNet" />
+		<link rel="author" href="https://plus.google.com/115340331147418233009/" />
+
+		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		
+		<link href="../css/main.css?cdv=1" type="text/css" rel="stylesheet"/>
+		<link href="../css/ucommerce.css" type="text/css" rel="stylesheet" />
+		<link href="../css/bootstrap.css" type="text/css" rel="stylesheet" />
+		<link href="../css/SyntaxHighlighter/shCore.css" type="text/css" rel="stylesheet" />
+		<link href="../css/SyntaxHighlighter/shThemeVS.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<section class="banner">
+				<div class="text">
+					<h1>uCommerce Sample App Documentation</h1>
+						<p class="strap">Includes documentation on what the sample app contains and how to set it up and use it</p>
+				</div>
+				<img src="images/documentation.jpg" alt="" class="banner-image">
+			</section>
+			<div style="clear:both;"></div>	
+			<div class="main">
+				<div class="contentcontainer">
+					<section class="two-cols cf">
+						<nav class="secondary">
+							<h2>Documentation</h2>
+							<div class="aside">
+									<div class="aside-box">
+										<div class="holder">
+											<div class="frame">
+												<ul class="accordion">
+													<li><a href="app-overview.html">App Overview</a></li>
+<li><a href="setup.html">Setup</a></li>
+<li><a href="api/index.html"><span class="toggle">&nbsp</span><strong>API</strong></a><ul style="display:none;">
+<li><a href="api/sample-api.html">Sample Api</a></li>
+</ul></li>
+<li><a href="what-is-installed.html">What's Installed</a></li>
+
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+						</nav>
+						<section class="main-col">
+							<h1 id="sample-api">Sample API</h1>
+<p>The Sample app comes with simple API called <code>SampleApp.Extensions.Api.SampleApi</code>, the sample api has two methods. </p>
+<p>The first is <code>SampleApi.uCommerceVersion()</code> and it returns the the version of uCommerce the application uses as a string, as you can see below.</p>
+<pre class="brush: csharp">
+    
+    public static string uCommerceVersion()
+    {
+    	string binPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin");
+    	var assemblyName = AssemblyName.GetAssemblyName(string.Format("{0}\\uCommerce.dll", binPath));
+    	return assemblyName.Version.ToString();
+    }
+    </pre>
+<p>The second method is <code>SampleApi.SchemaVersion()</code> which executes a query to get schema version of the the database and the method returns the schema version as a string, as you can see below.</p>
+<pre class="brush: csharp">
+    
+    public static string SchemaVersion()
+    {
+    	var sessionProvider = ObjectFactory.Instance.Resolve&lt;ISessionProvider>();
+    			
+    	//Don't use the using(var session = _sessionProvider.GetSession()) pattern as the session will be disposed at the end of the http request AND
+    	//Disposing the session here will cause trouble as lazy loading for all entities will then be broken.
+    	var session = sessionProvider.GetSession();
+    
+    	return new SchemaVersionQuery().Execute(session).FirstOrDefault().ToString();
+    }
+    </pre>
+
+						</section>
+					</section>
+				</div>
+			</div>		
+		</div>
+		
+		<script type="text/javascript" src="../scripts/jquery-1.7.2.min.js?cdv=1"></script>
+		<script type="text/javascript" src="../scripts/UCommerce.js"></script>
+		<script type="text/javascript" src="../scripts/SyntaxHighlighter/shCore.js"></script>
+		<script type="text/javascript" src="../scripts/SyntaxHighlighter/shAutoloader.js"></script>
+		<script type="text/javascript">
+			SyntaxHighlighter.autoloader(
+				'js jscript javascript	../scripts/SyntaxHighlighter/shBrushJScript.js',
+				'csharp					../scripts/SyntaxHighlighter/shBrushCSharp.js',
+				'xml xslt html			../scripts/SyntaxHighlighter/shBrushXml.js',
+				'sql					../scripts/SyntaxHighlighter/shBrushSql',
+				'css					../scripts/SyntaxHighlighter/shBrushCss.js',
+				'json					../scripts/SyntaxHighlighter/shBrushJson.js'
+			);
+			
+			SyntaxHighlighter.all();
+			
+			$(function() {
+				$('table').addClass('variables-matrix table table-bordered table-striped');
+			});
+		</script>
+	</body>
+</html>

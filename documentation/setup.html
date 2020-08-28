@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+	<head>
+		<meta charset="utf-8" />
+		<title>uCommerce Documentation - Setup</title>
+		
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" />
+		<link rel="publisher" href="https://plus.google.com/+UcommerceNet" />
+		<link rel="author" href="https://plus.google.com/115340331147418233009/" />
+
+		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		
+		<link href="css/main.css?cdv=1" type="text/css" rel="stylesheet"/>
+		<link href="css/ucommerce.css" type="text/css" rel="stylesheet" />
+		<link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+		<link href="css/SyntaxHighlighter/shCore.css" type="text/css" rel="stylesheet" />
+		<link href="css/SyntaxHighlighter/shThemeVS.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<section class="banner">
+				<div class="text">
+					<h1>uCommerce Sample App Documentation</h1>
+						<p class="strap">Includes documentation on what the sample app contains and how to set it up and use it</p>
+				</div>
+				<img src="images/documentation.jpg" alt="" class="banner-image">
+			</section>
+			<div style="clear:both;"></div>	
+			<div class="main">
+				<div class="contentcontainer">
+					<section class="two-cols cf">
+						<nav class="secondary">
+							<h2>Documentation</h2>
+							<div class="aside">
+									<div class="aside-box">
+										<div class="holder">
+											<div class="frame">
+												<ul class="accordion">
+													<li><a href="app-overview.html">App Overview</a></li>
+<li><a href="setup.html">Setup</a></li>
+<li><a href="api/index.html"><span class="toggle">&nbsp</span><strong>API</strong></a><ul style="display:none;">
+<li><a href="api/sample-api.html">Sample Api</a></li>
+</ul></li>
+<li><a href="what-is-installed.html">What's Installed</a></li>
+
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+						</nav>
+						<section class="main-col">
+							<h1 id="how-to-setup-the-sample-app">How to Setup the Sample App</h1>
+<p>The uCommerce sample app has multiple configuration options and ways to control what parts of the app is shown/enabled.</p>
+<h2 id="configure-the-uis">Configure the UIs</h2>
+<h3 id="tab">Tab</h3>
+<p>The tab is the UI with the most configuration options in sample app, below is the configuration of tab's configuration object that controls what is displayed on the tab and whether to display the tab or not.</p>
+<pre class="brush: xml">
+    
+    &lt;configuration>
+    	&lt;components>
+    		&lt;!-- Shows how you can control the value of properties on an object through castle windsor config -->
+    		&lt;component
+    				id="SampleApp.TabConfiguration"
+    				service="SampleApp.Extensions.Configuration.TabConfiguration, SampleApp.Extensions"
+    				type="SampleApp.Extensions.Configuration.TabConfiguration, SampleApp.Extensions">
+    			&lt;parameters>
+    				&lt;ShowTab>true&lt;/ShowTab>
+    				&lt;ShowUCommerceVersion>true&lt;/ShowUCommerceVersion>
+    				&lt;ShowShemaVersion>true&lt;/ShowShemaVersion>
+    			&lt;/parameters>
+    		&lt;/component>
+    	&lt;/components>
+    &lt;/configuration>
+    </pre>
+<p>The tab configuration object has three options that you can configure, the first is whether to show the tab or not.
+The second option is whether you want the tab to display the version of uCommerce that is installed and the last option is whether the tabs should display the database's schema version.</p>
+<p>Another way to disable the tab is to find the tab.config file and add &quot;.disabled&quot; this will let uCommerce know that you don't want use the config file, the tab.config can be found under the website at uCommerce/Apps/SampleApp/Configuration.</p>
+<h3 id="tree-nodes">Tree Nodes</h3>
+<p>As for the tree nodes, you can disable them all together by using the trick as for the tab, simple by adding the &quot;.disabled&quot; to the TreeNode.config which can be found in the same location as the tab.config file.</p>
+<p>You can control where the tree nodes appear through the TreeNode.config file, as you can see below in the &quot;supportTypes&quot; you can add new &quot;item&quot; to the &quot;list&quot; and by doing so the tree node will appear where you tell it to and vice versa when you remove an &quot;item&quot; from the &quot;list&quot;.
+The following link shows the different node types that can be used as the value of an &quot;item&quot;, <a href="http://docs.ucommerce.net/ucommerce/v7.0/extending-ucommerce/extending-ucommerce-admin/tree/tree-nodeTypes.html">Tree node type documentation</a></p>
+<pre class="brush: xml">
+    
+    &lt;configuration>
+    	&lt;components>
+    		&lt;!--  Adds the AboutNodeProvider to the TreeServiceShell -->
+    		&lt;partial-component id="TreeServiceShell">
+    			&lt;parameters>
+    				&lt;tasks>
+    					&lt;list>
+    						&lt;item insert="last">${SampleApp.SettingNodes.AboutNodeProvider}&lt;/item>
+    					&lt;/list>
+    				&lt;/tasks>
+    			&lt;/parameters>
+    		&lt;/partial-component>
+    
+    		&lt;!-- This is the configuration of the AboutNodeProvider -->
+    		&lt;!-- Which provides a new node to the Settings section and a root node -->
+    		&lt;component
+    				id ="SampleApp.SettingNodes.AboutNodeProvider"
+    				service="Ucommerce.Tree.ITreeContentProvider, Ucommerce"
+    				type="SampleApp.Extensions.UI.Tree.AboutNodeProvider, SampleApp.Extensions" >
+    			&lt;parameters>
+    				&lt;nodeName>About&lt;/nodeName>
+    				&lt;supportTypes>
+    					&lt;list>
+    						&lt;item>settings&lt;/item>
+    						&lt;item>apps&lt;/item>
+    					&lt;/list>
+    				&lt;/supportTypes>
+    			&lt;/parameters>
+    		&lt;/component>
+    	&lt;/components>
+    &lt;/configuration>
+    </pre>
+<h3 id="buttons">Buttons</h3>
+<p>The only thing you can configure on the buttons is whether to display them or not. the way to disable the buttons is to find the TabButtons.config file and add &quot;.disabled&quot; this will let uCommerce know that you don't want use the config file, the TabButtons.config can be found under the website at uCommerce/Apps/SampleApp/Configuration.</p>
+<h2 id="shoe-product-definition">Shoe Product Definition</h2>
+<p>On the product definition you can configure whether or not uCommerce should try to recreate it if it has been deleted, and agian the way to disable the buttons is to find the Initialize.config file and add &quot;.disabled&quot; this will let uCommerce know that you don't want use the config file, the TabButtons.config can be found under the website at uCommerce/Apps/SampleApp/Configuration.
+After you disable the config file and delete the Shoe product definition then it shouldn't reappear.</p>
+
+						</section>
+					</section>
+				</div>
+			</div>		
+		</div>
+		
+		<script type="text/javascript" src="scripts/jquery-1.7.2.min.js?cdv=1"></script>
+		<script type="text/javascript" src="scripts/UCommerce.js"></script>
+		<script type="text/javascript" src="scripts/SyntaxHighlighter/shCore.js"></script>
+		<script type="text/javascript" src="scripts/SyntaxHighlighter/shAutoloader.js"></script>
+		<script type="text/javascript">
+			SyntaxHighlighter.autoloader(
+				'js jscript javascript	scripts/SyntaxHighlighter/shBrushJScript.js',
+				'csharp					scripts/SyntaxHighlighter/shBrushCSharp.js',
+				'xml xslt html			scripts/SyntaxHighlighter/shBrushXml.js',
+				'sql					scripts/SyntaxHighlighter/shBrushSql',
+				'css					scripts/SyntaxHighlighter/shBrushCss.js',
+				'json					scripts/SyntaxHighlighter/shBrushJson.js'
+			);
+			
+			SyntaxHighlighter.all();
+			
+			$(function() {
+				$('table').addClass('variables-matrix table table-bordered table-striped');
+			});
+		</script>
+	</body>
+</html>

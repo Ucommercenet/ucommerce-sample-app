@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+	<head>
+		<meta charset="utf-8" />
+		<title>uCommerce Documentation - What's Installed</title>
+		
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" />
+		<link rel="publisher" href="https://plus.google.com/+UcommerceNet" />
+		<link rel="author" href="https://plus.google.com/115340331147418233009/" />
+
+		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		
+		<link href="css/main.css?cdv=1" type="text/css" rel="stylesheet"/>
+		<link href="css/ucommerce.css" type="text/css" rel="stylesheet" />
+		<link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+		<link href="css/SyntaxHighlighter/shCore.css" type="text/css" rel="stylesheet" />
+		<link href="css/SyntaxHighlighter/shThemeVS.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<section class="banner">
+				<div class="text">
+					<h1>uCommerce Sample App Documentation</h1>
+						<p class="strap">Includes documentation on what the sample app contains and how to set it up and use it</p>
+				</div>
+				<img src="images/documentation.jpg" alt="" class="banner-image">
+			</section>
+			<div style="clear:both;"></div>	
+			<div class="main">
+				<div class="contentcontainer">
+					<section class="two-cols cf">
+						<nav class="secondary">
+							<h2>Documentation</h2>
+							<div class="aside">
+									<div class="aside-box">
+										<div class="holder">
+											<div class="frame">
+												<ul class="accordion">
+													<li><a href="app-overview.html">App Overview</a></li>
+<li><a href="setup.html">Setup</a></li>
+<li><a href="api/index.html"><span class="toggle">&nbsp</span><strong>API</strong></a><ul style="display:none;">
+<li><a href="api/sample-api.html">Sample Api</a></li>
+</ul></li>
+<li><a href="what-is-installed.html">What's Installed</a></li>
+
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+						</nav>
+						<section class="main-col">
+							<h1 id="whats-installed">What's Installed</h1>
+<p>The sample app installs multiple UIs and a product definition and in still article we are going to take a look at the things that are installed.</p>
+<h2 id="uis">UIs</h2>
+<h3 id="tree-nodes">Tree nodes</h3>
+<p>The sample app will installed two tree nodes with the name &quot;About&quot; the nodes are identical and will show the same content that you can see in the right side of the picture.</p>
+<div class="figure">
+<img src="images/what-is-installed-1.png" alt="image" />
+</div>
+<h3 id="tab">Tab</h3>
+<p>The sample app also installs a new tab on the Setting node, which is named &quot;About&quot; and shows the same information as the tree nodes.</p>
+<div class="figure">
+<img src="images/what-is-installed-2.png" alt="image" />
+</div>
+<h3 id="buttons">Buttons</h3>
+<p>The sample app installs two buttons on the search node under the settings section, the first button will run index everything in uCommerce from scratch and the second button will open the website's frontpage in the content frame.</p>
+<div class="figure">
+<img src="images/what-is-installed-3.png" alt="image" />
+</div>
+<h2 id="shoe-product-definition">Shoe Product Definition</h2>
+<p>The sample app also installs a product definition called &quot;Shoe&quot; which has two product definition fields &quot;Awesomness&quot; which is of the data type boolean and &quot;ShortStory&quot; which is of the data type short text.
+This product definition is installed using <a href="http://docs.ucommerce.net/ucommerce/v7.0/extending-ucommerce/Initialize-pipeline.html">the initialization pipeline</a>, which means that even though you delete the product definition it will be recreated everytime the application is starts up.</p>
+<div class="figure">
+<img src="images/what-is-installed-4.png" alt="image" />
+</div>
+
+						</section>
+					</section>
+				</div>
+			</div>		
+		</div>
+		
+		<script type="text/javascript" src="scripts/jquery-1.7.2.min.js?cdv=1"></script>
+		<script type="text/javascript" src="scripts/UCommerce.js"></script>
+		<script type="text/javascript" src="scripts/SyntaxHighlighter/shCore.js"></script>
+		<script type="text/javascript" src="scripts/SyntaxHighlighter/shAutoloader.js"></script>
+		<script type="text/javascript">
+			SyntaxHighlighter.autoloader(
+				'js jscript javascript	scripts/SyntaxHighlighter/shBrushJScript.js',
+				'csharp					scripts/SyntaxHighlighter/shBrushCSharp.js',
+				'xml xslt html			scripts/SyntaxHighlighter/shBrushXml.js',
+				'sql					scripts/SyntaxHighlighter/shBrushSql',
+				'css					scripts/SyntaxHighlighter/shBrushCss.js',
+				'json					scripts/SyntaxHighlighter/shBrushJson.js'
+			);
+			
+			SyntaxHighlighter.all();
+			
+			$(function() {
+				$('table').addClass('variables-matrix table table-bordered table-striped');
+			});
+		</script>
+	</body>
+</html>

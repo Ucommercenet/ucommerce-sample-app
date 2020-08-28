@@ -1,0 +1,13 @@
+.hg/*
+.hgignore
+src/.idea/*
+src/packages/*
+src/SampleApp.Extensions/bin/*
+src/SampleApp.Extensions/obj/*
+package/*
+src/SampleApp.Documentation/bin/*
+src/SampleApp.Documentation/obj/*
+src/SampleApp.Extensions.Test/bin/*
+src/SampleApp.Extensions.Test/obj/*
+src/SampleApp.Web/bin/*
+src/SampleApp.Web/obj/*
