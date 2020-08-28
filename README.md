@@ -1,4 +1,4 @@
-# uCommerce Samples App#
+# Ucommerce Samples App
 
 This is the uCommerce Samples App that shows some of the most popular extension points to uCommerce.
 You can read the change log below and see what the different versions features.
